@@ -14,6 +14,7 @@ def add_list_item
   quantity = gets.chomp.to_i
 
   hash = { "name" => item_name, "quantity" => quantity }
+  puts "Would you like to add more items? (yes/no)"
   return hash
 end
 
@@ -35,11 +36,12 @@ end
 
 
 list = create_list()
-puts "Add your items to the list."
+puts "Add some items to the list."
 
-list['items'].push(add_list_item())
-list['items'].push(add_list_item())
-list['items'].push(add_list_item())
+loop do list['items'].push(add_list_item())
+  user_input = gets.chomp.downcase
+  break if user_input == "no"
+end
 
 puts "Here's your list:\n"
 print_list(list)
