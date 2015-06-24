@@ -40,6 +40,10 @@ class Contact
     @last_name
   end
 
+  def first_last
+    first_name + " " + last_name
+  end
+
   def last_first
     last_first = last_name
     last_first += ", "
@@ -89,14 +93,4 @@ class Contact
   end
 end
 
-joslyn = Contact.new
-joslyn.first_name = "Joslyn"
-joslyn.last_name = "Rosbrook"
-joslyn.add_phone_number("cell", "0666")
-joslyn.add_phone_number("work", "1234")
-joslyn.add_address("home", "123 Main St.", "", "Seattle", "WA", "98101")
-
-puts joslyn.to_s('full_name')
-joslyn.print_phone_numbers
-joslyn.print_addresses
 
