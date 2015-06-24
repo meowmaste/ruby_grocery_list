@@ -8,6 +8,16 @@ class AddressBook
     @contacts = []
   end
 
+  def print_results(search, results)
+    puts search
+    results.each do |contact|
+      puts contact.to_s('full_name')
+      contact.print_phone_numbers
+      contact.print_addresses
+      puts "\n"
+    end
+  end
+
   def find_by_name(name)
     results = []
     search = name.downcase
@@ -16,13 +26,20 @@ class AddressBook
         results.push(contact)
       end
     end
-    puts "Name search results (#{search})"
-    results.each do |contact|
-      puts contact.to_s('full_name')
-      contact.print_phone_numbers
-      contact.print_addresses
-      puts "\n"
+    print_results("Name search results (#{search})", results)
+  end
+
+  def find_by_phone_number(number)
+    results = []
+    search = number.gsub("-", "")
+    contacts.each do |contact|
+      contact.phone_numbers.each do |phone_number|
+        if phone_number.number.gsub("-", "")
+          results.push(contact) unless results.include?(contact)
+        end
+      end
     end
+    print_results("Phone Number Search Results (#{search})", results)
   end
 
   def print_contacts
@@ -45,11 +62,12 @@ joslyn.add_address("home", "123 Main St.", "", "Seattle", "WA", "98101")
 luna = Contact.new
 luna.first_name = "Luna"
 luna.last_name = "Rosbrook"
-luna.add_phone_number("cell", "1234")
+luna.add_phone_number("cell", "123456")
 luna.add_address("home", "123 Main St.", "", "Seattle", "WA", "98101")
 
 address_book.contacts.push(joslyn)
 address_book.contacts.push(luna)
 #address_book.print_contacts
 
-address_book.find_by_name("luna")
+address_book.find_by_name("l")
+address_book.find_by_phone_number("6")
