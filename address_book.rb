@@ -8,6 +8,72 @@ class AddressBook
     @contacts = []
   end
 
+  def run
+    loop do
+      puts "Adress Book"
+      puts "a: Add Contact"
+      puts "p: Print Address Book"
+      puts "e: Exit"
+      print "Enter your choice: "
+      input = gets.chomp.downcase
+      case input
+      when 'a'
+        add_contact
+      when 'p'
+        print_contacts
+      when 'e'
+        break
+      end
+    end
+  end
+
+  def add_contact
+    contact = Contact.new
+    print "First name: "
+    contact.first_name = gets.chomp
+    print "Middle name: "
+    contact.middle_name = gets.chomp
+    print "Last name: "
+    contact.last_name = gets.chomp
+
+    loop do
+      puts "Add phone number or address? "
+      puts "p: Add phone number"
+      puts "a: Add address"
+      puts "(Any other key to go back)"
+      response = gets.chomp.downcase
+      case response
+      when 'p'
+        phone = PhoneNumber.new
+        print "Phone number kind (home, work, etc.)?"
+        phone.kind = gets.chomp
+        print "Number: "
+        phone.number = gets.chomp
+        contact.phone_numbers.push(phone)
+      when 'a'
+        address = Address.new
+        print "Address Kind (home, work, etc.)?"
+        address.kind = gets.chomp
+        print "Address Line 1: "
+        address.street_1 = gets.chomp
+        print "Address Line 2: "
+        address.street_2 = gets.chomp
+        print "City: "
+        address.city = gets.chomp
+        print "State: "
+        address.state = gets.chomp
+        print "Postal Code: "
+        address.postal_code = gets.chomp
+        contact.addresses.push(address)
+      else
+        print "\n"
+        break
+      end
+    end
+
+    contacts.push(contact)
+  end
+
   def print_results(search, results)
     puts search
     results.each do |contact|
@@ -64,24 +130,4 @@ class AddressBook
 end
 
 address_book = AddressBook.new
-
-joslyn = Contact.new
-joslyn.first_name = "Joslyn"
-joslyn.last_name = "Rosbrook"
-joslyn.add_phone_number("cell", "0666")
-joslyn.add_phone_number("work", "1234")
-joslyn.add_address("home", "123 Main St.", "", "Seattle", "WA", "98101")
-
-luna = Contact.new
-luna.first_name = "Luna"
-luna.last_name = "Rosbrook"
-luna.add_phone_number("cell", "123456")
-luna.add_address("home", "123 Main St.", "", "Seattle", "WA", "98101")
-
-address_book.contacts.push(joslyn)
-address_book.contacts.push(luna)
-#address_book.print_contacts
-
-#address_book.find_by_name("l")
-#address_book.find_by_phone_number("6")
-address_book.find_by_address("Main")
+address_book.run
