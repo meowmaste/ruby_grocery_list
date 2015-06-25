@@ -50,7 +50,7 @@ class Contact
     last_first += first_name
     if !@middle_name.nil?
       last_first += " "
-      last_first += middle_name.slice(0,1)
+      last_first += middle_name.slice(0, 1)
       last_first += "."
     end
     last_first
@@ -83,7 +83,7 @@ class Contact
   end
 
   def print_phone_numbers
-    puts "Phone Numbers: "
+    puts "Phone Numbers"
     phone_numbers.each { |phone_number| puts phone_number }
   end
 
