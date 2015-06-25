@@ -1,0 +1,23 @@
+---
+- !ruby/object:Contact
+  phone_numbers: []
+  addresses: []
+  first_name: Joslyn
+  middle_name: L
+  last_name: Rosbrook
+- !ruby/object:Contact
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: work
+    number: '123456'
+  addresses:
+  - !ruby/object:Address
+    kind: work
+    street_1: 1234 Meow Town Ave
+    street_2: Suite 210
+    city: Seattle
+    state: WA
+    postal_code: '98101'
+  first_name: Luna
+  middle_name: Tuna
+  last_name: Rosbrook
