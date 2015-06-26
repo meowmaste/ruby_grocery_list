@@ -48,7 +48,7 @@ class Contact
     last_first = last_name
     last_first += ", "
     last_first += first_name
-    if !@middle_name.nil?
+    if !@middle_name.nil? && !@middle_name.empty?
       last_first += " "
       last_first += middle_name.slice(0, 1)
       last_first += "."
@@ -58,7 +58,7 @@ class Contact
 
   def full_name
     full_name = first_name
-    if !@middle_name.nil?
+    if !@middle_name.nil? && !@middle_name.empty?
       full_name += " "
       full_name += middle_name
     end

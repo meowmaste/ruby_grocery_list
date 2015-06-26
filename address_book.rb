@@ -28,6 +28,7 @@ class AddressBook
       puts "a: Add Contact"
       puts "p: Print Address Book"
       puts "s: Search"
+      puts "d: Delete"
       puts "e: Exit"
       print "Enter your choice: "
       input = gets.chomp.downcase
@@ -42,6 +43,10 @@ class AddressBook
         find_by_name(search)
         find_by_phone_number(search)
         find_by_address(search)
+      when 'd'
+        print "Enter name of delete:"
+        search = gets.chomp
+        delete_contact_by_name(search)
       when 'e'
         save()
         break
@@ -95,6 +100,11 @@ class AddressBook
     end
 
     contacts.push(contact)
+  end
+
+  def delete_contact_by_name(name)
+    search = name.downcase
+    contacts.reject! { |contact| contact.full_name.downcase == search }
   end
 
   def print_results(search, results)
